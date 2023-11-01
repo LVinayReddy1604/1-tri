@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- <h2 class="text-center d-block p-2 text-bg-dark my-2 w-50"></h2> -->
+    <div class="container">
+    </div>
+    <div class="d-flex flex-row justify-content-evenly" style="padding:20px 20px;">
+      <div class="ml-2">
+        <h3>Filters</h3>
+        <div class="mx-2">
+          <nav class="navbar navbar-light">
+            <form id="searchForm" class="form-inline">
+              <div class="mt-2 ml-2">
+                <div class="form-check">
+                  <input hidden
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    name="checkPrice"
+                  />
+                  <label hidden class="form-check-label" for="flexCheckDefault">
+                    price
+                  </label>
+                </div>
+                <div class="mt-2 dropdown">
+                  <span class="mb-2">select category</span>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    name="selectCategory"
+                    id="category"
+                  >
+                    <option selected value="">none</option>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="input-group">
+                <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  name="searchText"
+                />
+                <button
+                  class="btn btn-outline-success mx-2 my-2 my-sm-0"
+                  type="submit"
+                >
+                  Search
+                </button>
+              </div>
+            </form>
+          </nav>
+        </div>
+        <div class="ml-2">
+          <div id="searchContent"></div>
+          <div
+            id="alertMessage"
+            hidden
+            class="alert alert-danger"
+            role="alert"
+          ></div>
+        </div>
+      </div>   
+      <div>
+        <h2 class="text-center">Available Products in Store</h2>
+        <div class="container">
+          <div id="productList" class="row"></div>
+        </div>
+      </div>
+      
+    </div>
+  </body>
+  <script>
+    const productList = document.getElementById('productList');
+    const form = document.getElementById('searchForm');
+    const searchContent = document.getElementById('searchContent');
+    const alertMessage = document.getElementById('alertMessage');
+    const category = document.getElementById('category');
+
+    function productCard(data, divType) {
+      console.log('product');
+      data.map(
+        (product) =>
+          (divType.innerHTML += `
+          <div class="col-2 card mx-2 my-2" style="width: 12rem;">
+          <img class="card-img-top" src=${product.thumbnail} alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text">${product.title}</p>
+            <p class="card-text">$${product.price}</p>
+            <p class="card-text">rating : ${product.rating}</p>
+            <p class="card-text">${product.category}</p>  
+          </div>
+        </div>
+          `)
+      );
+    }
+
+    async function makeRequest() {
+      //to fetcg products
+      const res = await fetch('https://dummyjson.com/products');
+      const data = await res.json();
+      productCard(data.products, productList);
+      console.log(data);
+
+      //to fetch categories
+      const response = await fetch('https://dummyjson.com/products/categories');
+      const categories = await response.json();
+      console.log('cat', categories);
+      categories.map(
+        (product) =>
+          (category.innerHTML += `
+        <option value=${product}>${product}</option>
+        `)
+      );
+    }
+
+    async function getCategory(selectCategory) {
+      const url = selectCategory
+        ? `https://dummyjson.com/products/category/${selectCategory}`
+        : `https://dummyjson.com/products/categories`;
+      const res = await fetch(url);
+      const data = await res.json();
+      console.log('category function', data.products);
+
+      return data.products;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      searchContent.innerHTML = '';
+      alertMessage.setAttribute('hidden', true);
+      const searchText = e.target.searchText.value;
+      const checkPrice = e.target.checkPrice.checked;
+      const selectCategory = e.target.selectCategory.value;
+      console.log(selectCategory);
+      if (searchText) {
+        console.log('hello');
+        const res = await fetch(
+          `https://dummyjson.com/products/search?q=${searchText}`
+        );
+        const data = await res.json();
+        if (data.products.length === 0) {
+          alertMessage.removeAttribute('hidden');
+          alertMessage.innerHTML = 'no matching results';
+          return;
+        }
+        if (checkPrice) {
+          data.products.sort((a, b) => {
+            return a.price - b.price;
+          });
+        }
+        console.log(data.products);
+        console.log('selectCategory', selectCategory);
+        if (selectCategory != '') {
+          console.log('entry');
+          const data = await getCategory(selectCategory);
+          data.sort((a, b) => {
+            return a.price - b.price;
+          });
+          console.log('sorted', data);
+          productCard(data, searchContent);
+        }
+        productCard(data.products, searchContent);
+      } else {
+        alertMessage.removeAttribute('hidden');
+        alertMessage.innerHTML = 'Please enter Search field';
+      }
+    });
+
+    window.onload = (event) => {
+      makeRequest();
+    };
+  </script>
+</html>

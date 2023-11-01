@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <!-- Include any additional stylesheets or meta tags here -->
+</head>
+<body>
+    <header>
+        <!-- Header content goes here -->
+    </header>
+    <main>
+        <p>Brief introductory paragraph goes here.</p>
+        <button id="geolocationButton">Get Geolocation</button>
+        <canvas id="map" width="800" height="600"></canvas>
+    </main>
+    <script src="https://www.bing.com/api/maps/mapcontrol?key=AnNzK74_yeP5AmqlCzPBv6ZRveMqje66OB_GWrpgTx_OjvgTaOnQmgKaKgP9Snd3"></script>
+    <script>
+        // Your JavaScript code for interacting with the Bing Maps API goes here
+        // This script might contain code to initialize the map and handle geolocation data.
+        let map, infoWindow;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 6,
+  });
+  infoWindow = new google.maps.InfoWindow();
+
+  const locationButton = document.createElement('button');
+
+  // button creation
+  locationButton.textContent = 'Get Current Location';
+  locationButton.className = 'btn btn-primary';
+  locationButton.classList.add('custom-map-control-button');
+
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener('click', () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          infoWindow.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  });
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? 'Error: The Geolocation service failed.'
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}
+
+window.initMap = initMap;
+    </script>
+    <!-- Additional scripts for your own JavaScript code go here -->
+</body>
+</html>

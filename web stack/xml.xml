@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CD_catelogue>
+    <cd>
+        <type>movie</type>
+        <size>2GB</size>
+        <content>R3</content>
+        <price>Rs.100</price>
+    </cd>
+    <cd>
+        <type>music</type>
+        <size>1GB</size>
+        <content>Justin</content>
+        <price>Rs.10</price>
+    </cd>
+    <cd>
+        <type>Games</type>
+        <size>8GB</size>
+        <content>GTA</content>
+        <price>Rs.200</price>
+    </cd>
+    <cd>
+        <type>Pictures</type>
+        <size>1GB</size>
+        <content>Trip</content>
+        <price>Rs.50</price>
+    </cd>
+    <cd>
+        <type>Files</type>
+        <size>3GB</size>
+        <content>Employee Data</content>
+        <price>Rs.200</price>
+    </cd>
+</CD_catelogue>

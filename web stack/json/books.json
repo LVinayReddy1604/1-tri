@@ -1,0 +1,24 @@
+{
+    "books": [
+      {
+        "title": "Let's C",
+        "price": 800
+      },
+      {
+        "title": "Getting started with JavaScript",
+        "price": 900
+      },
+      {
+        "title": "The art of computer programming",
+        "price": 500
+      },
+      {
+        "title":"Python Programming",
+        "price":600
+      },
+      {
+        "title":"JavaScript Programming",
+        "price":700
+      }
+    ]
+  }

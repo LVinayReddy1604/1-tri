@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "description": "A novel about the American Dream and the Roaring Twenties.",
+      "reviews": []
+    },
+    {
+      "id": 2,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "description": "A classic novel addressing racial injustice in the American South.",
+      "reviews": []
+    },
+    {
+      "id": 3,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "description": "A beloved novel exploring themes of love, class, and society.",
+      "reviews": []
+    },
+    {
+      "id": 4,
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "description": "A coming-of-age novel about teenage rebellion and alienation.",
+      "reviews": []
+    },
+    {
+      "id": 5,
+      "title": "1984",
+      "author": "George Orwell",
+      "description": "A dystopian novel depicting a totalitarian society.",
+      "reviews": []
+    },
+    {
+      "id": 6,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "description": "A fantasy adventure novel set in Middle-earth.",
+      "reviews": []
+    },
+    {
+      "id": 7,
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "description": "A philosophical novel about personal legends and destiny.",
+      "reviews": []
+    },
+    {
+      "id": 8,
+      "title": "Moby-Dick",
+      "author": "Herman Melville",
+      "description": "A novel exploring the obsessive pursuit of the white whale.",
+      "reviews": []
+    },
+    {
+      "id": 9,
+      "title": "The Lord of the Rings",
+      "author": "J.R.R. Tolkien",
+      "description": "A high-fantasy epic trilogy set in Middle-earth.",
+      "reviews": []
+    },
+    {
+      "id": 10,
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "description": "A dystopian novel portraying a technologically advanced society.",
+      "reviews": []
+    }
+  ]
+  

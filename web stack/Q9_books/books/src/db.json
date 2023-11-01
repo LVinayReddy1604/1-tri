@@ -1,0 +1,24 @@
+{
+    "books": [
+      {
+        "id": 1,
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "description": "A novel about the American Dream and the Roaring Twenties."
+      },
+      {
+        "id": 2,
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "description": "A classic novel addressing racial injustice in the American South."
+      },
+      {
+        "id": 3,
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "description": "A beloved novel exploring themes of love, class, and society."
+      }
+     
+    ]
+  }
+  

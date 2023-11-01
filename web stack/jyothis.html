@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Geolocation</title>
+    <meta charset="utf-8" />
+	<script type='text/javascript'>
+    function GetMap() {
+        var map = new Microsoft.Maps.Map('#myMap', {
+            credentials: 'AnNzK74_yeP5AmqlCzPBv6ZRveMqje66OB_GWrpgTx_OjvgTaOnQmgKaKgP9Snd3'
+        });
+
+        var infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+            visible: false
+        });
+
+        infobox.setMap(map);
+
+        var button = document.createElement('button');
+        button.innerHTML = 'Show Current Location';
+        button.id = 'showCurrentLocationButton';
+        button.style.marginLeft = "46%";
+        button.onclick = function () {
+            // Request the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    position.coords.latitude,
+                    position.coords.longitude);
+
+                // Clear any previous pins
+                map.entities.clear();
+
+                // Add a pushpin at the user's location.
+                // var pin = new Microsoft.Maps.Pushpin(loc, {
+                //     icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png', // Blue icon
+                //     anchor: new Microsoft.Maps.Point(12, 39) // Adjust anchor point
+                // });
+
+                // Show infobox with location details
+                infobox.setOptions({
+                    visible: true,
+                    location: loc,
+                    description: 'Your current location'
+                });
+
+                map.entities.push(pin);
+
+                // Center the map on the user's location.
+                map.setView({ center: loc, zoom: 15 });
+            });
+        };
+        document.body.appendChild(button);
+    }
+    </script>
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="highlight-container">
+    <h1>City Exploration Web App</h1>
+  
+  <p>Welcome to the City Exploration Web App! Click the "Show Current Location" button to start exploring.</p>
+</div></header>
+    <style>
+        body {
+            background-image: url('desktop-wallpaper-world-map-computer-laptop-world-map-travel-world-map.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        #myMap {
+            margin-left: 30%;
+            border: 2px solid #0e0c0c;
+            border-radius: 50px;
+            width: 50%;
+            height: 400px;
+            margin-top: 4%;
+            margin-bottom: 8%;
+            overflow: hidden;
+        }
+        .highlight-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #f00; /* Red text color */
+        }
+        p {
+          color: #f00;
+        }
+    </style>
+
+    <div id="myMap"></div>
+</body>
+</html>

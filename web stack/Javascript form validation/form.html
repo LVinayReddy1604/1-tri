@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div>
+            <form name="signup">
+                <label for="name">Name:</label>
+                <input id="name" name="name" type="text" placeholder="Name" required ><br><br>
+                <label for="E-mail">E-mail</label>
+                <input id="email" name="E-mail" type="email" placeholder="Mail" required /><br><br>
+                <label for="pass">Password</label>
+                <input id="password" type="password" name="pass" placeholder="password" required ><br><br>
+                <label for="cpass">Confirm-Password</label>
+                <input id="cpassword" type="password" name="cpass" placeholder="confirm password" required ><br><br>
+                <label for="DOB">Date of Birth</label>
+                <input id="dob" type="date" placeholder="DOB" required><br><br>
+                <input type="submit" id="submit" value="submit" onclick="validateLoginForm();">
+            </form>
+        </div>
+    </body>
+    <script>
+
+    // var submit=document.getElementById("submit");
+
+    function validateLoginForm(){
+   
+    const name=document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    const cpass=document.getElementById('cpassword').value;
+    const dob=document.getElementById('dob').value;
+
+    // Name validation
+    var regex=/^[a-zA-Z ]+$/;
+    if (name==null || name=="" || name.length<3 || typeof name!=="string" || !regex.test(name)){  
+        alert("Name can't be blank");  
+         return false;
+    }
+    // Validate email
+    if(email.indexOf('.')==-1 || email.indexOf('@')==-1 || email.indexOf('@')>email.indexOf('.')) {  
+        alert('Please enter a valid email address.');
+       return false;
+    }
+
+    // Validate password
+    var regex=/^(?=.*[a-zA-Z])(?=.*[0-9]).*$/;
+    if (pass.length<8 || pass.length==0 || typeof pass!=="string" || !regex.test(pass)) {
+        alert('Please enter a valid password.');
+        return false;
+    }
+
+    //Password comparison
+    if(cpass!=pass){
+        alert("passwords does not match.");
+        return false;
+    }
+
+    //DOB Validation
+    if(new Date(dob) > new Date() || !isDate(dob) || isNan(dob)){
+        alert("Invalid Date of Birth");
+        return false;
+    }
+    
+    // If all validations pass, submit the form
+    alert('Login successful!');
+    }
+
+    // submit.addEventListener('click',(e)=>{
+    //     e.preventDefault();
+    //     validateLoginForm();
+    // })
+    </script>
+</html>

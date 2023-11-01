@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employee>
+  <personalinfo>
+    <firstname>Vinay</firstname>
+    <lastname>Reddy</lastname>
+    <dateofbirth>2002</dateofbirth>
+    <gender>male</gender>
+    <email>vinay@gmail.com</email>
+    <phonenumber>123-456-7890</phonenumber>
+    <position>HR</position>
+    <salary>45000</salary>
+  </personalinfo>
+</employee>

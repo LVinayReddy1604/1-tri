@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+    <form>
+        <h1>Multiplication and Division Calculator</h1>
+        <form>
+            <label for="num1">Enter the first number:</label>
+            <input type="number" id="num1" name="num1"><br><br>
+            <label for="num2">Enter the second number:</label>
+            <input type="number" id="num2" name="num2"><br><br>
+            <input type="button" value="Calculate" onclick="calculate()">
+        </form>
+        <p id="result"></p>
+
+
+    
+    <script>
+    // 1. Write a JavaScript program to display the current day and time in the following format.  
+// Today is : Saturday.
+// Current time is : 10 AM : 30 : 38
+
+let today = new Date();
+let dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let day = dayOfWeek[today.getDay()];
+let hours = today.getHours();
+let minutes = today.getMinutes();
+let seconds = today.getSeconds();
+if (hours < 10) {
+  hours = "0" + hours;
+}
+if (minutes < 10) {
+  minutes = "0" + minutes;
+}
+if (seconds < 10) {
+  seconds = "0" + seconds;
+}
+alert("Today is : " + day);
+alert("Current time is : " + hours + " AM : " + minutes + " : " + seconds);
+
+
+// 2.Write a JavaScript program where the program takes a random integer between 1 and 10, and the user is then prompted to input a guess number. The program displays a message "Good Work" if the input matches the guess number otherwise "Not matched". 
+
+let randomNumber = Math.floor(Math.random() * 10) + 1;
+let guess = parseInt(prompt("Guess a number between 1 and 10"));
+if (guess === randomNumber) {
+  alert("Good Work");
+} else {
+  alert("Not matched");
+}
+
+// 3.Write a JavaScript program to calculate multiplication and division of two numbers using forms(input from the user). 
+
+function calculate() {
+			let num1 = document.getElementById("num1").value;
+			let num2 = document.getElementById("num2").value;
+			let result = document.getElementById("result");
+
+			let multiplication = num1 * num2;
+			let division = num1 / num2;
+
+			result.innerHTML = "Multiplication: " + multiplication + "<br>" + "Division: " + division;
+		}
+
+// 4. Write a JavaScript program to get the website URL (loading page).
+const url = window.location.href;
+alert("The URL is: "+url);
+
+// 4. 
+    </script>
+
+</body>
+</html>

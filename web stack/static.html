@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bing Maps Geolocation Demo</title>
+  <script src="https://www.bing.com/api/maps/mapcontrol?v=2.0"></script>
+  <style>
+    canvas {
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bing Maps Geolocation Demo</h1>
+  <p>This demo shows how to use the Bing Maps API to get the user's location and draw a map of the area around them.</p>
+  <button onclick="getLocation()">Get My Location</button>
+  <canvas id="mapCanvas" width="500" height="500"></canvas>
+</body>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        var mapOptions = {
+            credentials: "https://www.bing.com/api/maps/mapcontrol?key={AquS9RRQEbzzGXIBOIN9piZm4jjfY205CTBdZbFmZX6jU1yWwM89LdoxYOPsNfFS}",
+            center: new Microsoft.Maps.Location(lat, lon),
+            zoom: 15
+        };
+        var map = new Microsoft.Maps.Map(document.getElementById("mapCanvas"), mapOptions);
+
+        // Draw a blue dot at the user's location
+        var pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(lat, lon));
+        map.entities.push(pin);
+
+        // Draw a red label at the user's location
+        var label = new Microsoft.Maps.Infobox(new Microsoft.Maps.Location(lat, lon), {
+            title: "You are here",
+            description: "Latitude: " + lat + "<br>Longitude: " + lon,
+            visible: true
+        });
+        map.entities.push(label);
+
+        // Draw a blue circle around the user's location
+        var circle = new Microsoft.Maps.Circle(new Microsoft.Maps.Location(lat, lon), 1000, {
+            fillColor: 'blue',
+            strokeColor: 'blue'
+        });
+        map.entities.push(circle);
+    }
+</script>
+</html>

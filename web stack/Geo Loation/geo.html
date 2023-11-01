@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Geolocation</title>>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .map {
+            margin: 0 auto;
+            width: 50%;
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border: 1px solid #0a36e3;
+        }
+        .map-header {
+            font-weight: 400;
+            color: #0a36e3;
+        }
+        .map-description {
+            color: #0a36e3;
+        }
+        .map-btn {
+            padding: 8px 15px;
+            background-color: transparent;
+            outline: none;
+            border: 1px solid #0a36e3;
+            color: #0a36e3;
+        }
+        .map-view {
+            width: 550px;
+            height: 400px;
+            padding: 1rem;
+            margin:1.5rem 1rem 1rem 1rem;
+        }    
+    </style>
+</head>
+<body>
+    <div class="map">
+    <h1 class="map-header">Demonstrate on Geolocation in HTML5</h1>
+    <p class="map-description">Click the button below to get your current location.</p>
+    <button class="map-btn" id="submit">Get My Location</button>
+    <div id="mapId" class="map-view"></div>
+    </div>
+    <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?key=AmPo7Obw7MXmyo3ayIEiSlRIveTa4HQdJRmoUt9Zi8OrYSOUMLC-LRhxWAc0nwqb&callback=loadMap" async defer></script>
+    <script src="script.js"></script>
+    
+</body>
+<script>
+
+    var mapId = document.getElementById('mapId');
+    var submit = document.getElementById('submit')
+
+
+    const loadMap = ()  => {
+        new Microsoft.Maps.Map(mapId, {
+            credentials: 'AmPo7Obw7MXmyo3ayIEiSlRIveTa4HQdJRmoUt9Zi8OrYSOUMLC-LRhxWAc0nwqb'
+        });
+    }
+
+    const locateSuccess = (position) => {
+        let map = new Microsoft.Maps.Map(mapId);
+        let loc = new Microsoft.Maps.Location(position.coords.latitude, position.coords.longitude)
+        let pin = new Microsoft.Maps.Pushpin(loc);
+        map.entities.push(pin);
+        map.setView({
+            center: loc,
+            zoom: 15
+
+        });
+
+    }
+
+    const locateFail = (error) => {
+        alert('Geolocation failed: ' + error.message);
+    }
+
+    const getLocation = () =>  {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(locateSuccess, locateFail);
+        } else {
+            alert('Geolocation is not supported by your browser.');
+        }
+    }
+
+    
+    submit.addEventListener('click', () => {
+        getLocation();
+        window.onload = loadMap;
+    });
+</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registration Form</h1>
+
+  <form action="submit.php" method="post" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <span class="error" id="name-error"></span>
+
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <span class="error" id="email-error"></span>
+
+    <label for="address">Address:</label>
+    <input type="text" name="address" id="address" required>
+    <span class="error" id="address-error"></span>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name');
+      var email = document.getElementById('email');
+      var address = document.getElementById('address');
+
+      // Validate name
+      if (name.value === '') {
+        document.getElementById('name-error').textContent = 'Name is required.';
+        return false;
+      }
+
+      // Validate email
+      if (!email.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+        document.getElementById('email-error').textContent = 'Invalid email address.';
+        return false;
+      }
+
+      // Validate address
+      if (address.value === '') {
+        document.getElementById('address-error').textContent = 'Address is required.';
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</body>
+</html>
